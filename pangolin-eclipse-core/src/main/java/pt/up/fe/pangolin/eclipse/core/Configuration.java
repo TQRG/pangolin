@@ -1,0 +1,78 @@
+package pt.up.fe.pangolin.eclipse.core;
+
+import java.io.IOException;
+import java.net.URL;
+
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.debug.core.DebugPlugin;
+
+import pt.up.fe.pangolin.core.AgentConfigs;
+import pt.up.fe.pangolin.eclipse.core.launching.LaunchesListener;
+import pt.up.fe.pangolin.eclipse.core.messaging.InstrumentationServer;
+import pt.up.fe.pangolin.eclipse.runtime.Agent;
+
+public class Configuration {
+	
+	private String agentPath;
+	private InstrumentationServer server;
+	private LaunchesListener launchesListener;
+	
+	private static Configuration configuration;
+	public static Configuration get() {
+		if(configuration == null)
+			configuration = new Configuration();
+		return configuration;
+	}
+	
+	public Configuration() {
+		prepareAgent();
+		try {
+			this.server = new InstrumentationServer();
+			this.server.start();
+		} catch (IOException exception) {
+			this.server = null;
+		}
+		
+		launchesListener = new LaunchesListener();
+		DebugPlugin.getDefault().getLaunchManager().addLaunchListener(launchesListener);
+	}
+	
+	public int getServerPort() {
+		if (this.server == null) {
+			return -1;
+		}
+		return this.server.getPort();
+	}
+	
+	public String getAgentArg(AgentConfigs configs) {
+		return " -javaagent:\"" + agentPath + "\"=" + configs.serialize();
+	}
+	
+	private void prepareAgent() {
+		URL agentLocation = Agent.class.getProtectionDomain().getCodeSource().getLocation();
+
+		if(agentLocation != null) {
+			
+			try {
+				agentLocation = FileLocator.resolve(agentLocation); // resolve if resource is an OSGi bundle
+				String path = agentLocation.getPath();
+
+				/* windows path is something like /C:/blablabla/, we should remove that first slash */
+				if (System.getProperty("os.name").toLowerCase().contains("win")) {
+					path = path.replaceFirst("/", "");
+				}
+
+				if(path.endsWith(".jar")) {
+					agentPath = path;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
+	public LaunchesListener getLaunchesListener() {
+		return launchesListener;
+	}
+}

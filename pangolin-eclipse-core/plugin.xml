@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.5"?>
+<plugin>
+   <extension
+         point="org.eclipse.debug.core.launchModes">
+      <launchMode
+            label="Run Pangolin"
+            mode="pt.up.fe.pangolin.eclipse.core.mode">
+      </launchMode>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.launchDelegates">
+      <launchDelegate
+            delegate="pt.up.fe.pangolin.eclipse.core.launching.PangolinLaunchDelegate"
+            id="pt.up.fe.pangolin.eclipse.core.launchDelegate.jdt_junit"
+            modes="pt.up.fe.pangolin.eclipse.core.mode"
+            type="org.eclipse.jdt.junit.launchconfig">
+      </launchDelegate>
+      <launchDelegate
+            delegate="pt.up.fe.pangolin.eclipse.core.launching.PangolinLaunchDelegate"
+            id="pt.up.fe.pangolin.eclipse.core.launchDelegate.localJavaApplication"
+            modes="pt.up.fe.pangolin.eclipse.core.mode"
+            type="org.eclipse.jdt.launching.localJavaApplication">
+      </launchDelegate>
+   </extension>
+</plugin>

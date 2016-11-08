@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>pt.up.fe.pangolin</groupId>
+        <artifactId>pangolin-parent</artifactId>
+        <version>0.0.1</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <artifactId>pangolin-eclipse-runtime</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>pt.up.fe.pangolin</groupId>
+            <artifactId>pangolin-core</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <finalName>pt.up.fe.pangolin.eclipse.runtime</finalName>
+                    <outputDirectory>../pangolin-eclipse-core/lib/</outputDirectory>
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <transformers>
+                        <transformer
+                            implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <manifestEntries>
+                                <Premain-Class>pt.up.fe.pangolin.eclipse.runtime.Agent</Premain-Class>
+                                <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                                <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                            </manifestEntries>
+                        </transformer>
+                    </transformers>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>org/eclipse/jdt/**</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                    <relocations>
+                        <relocation>
+                            <pattern>javassist</pattern>
+                            <shadedPattern>pt.up.fe.pangolin.core.javassist</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>flexjson</pattern>
+                            <shadedPattern>pt.up.fe.pangolin.core.flexjson</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
