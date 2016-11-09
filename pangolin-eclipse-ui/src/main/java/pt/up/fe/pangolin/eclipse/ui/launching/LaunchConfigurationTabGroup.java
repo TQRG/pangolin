@@ -67,10 +67,7 @@ public class LaunchConfigurationTabGroup implements ILaunchConfigurationTabGroup
 	@Override
 	public ILaunchConfigurationTab[] getTabs() {
 		if(delegate != null) {
-			//in case we need to insert a configuration tab
-			//return insertTab(delegate.getTabs(), new LaunchConfigurationTab());
-			
-			return delegate.getTabs();
+			return insertTab(delegate.getTabs(), new LaunchConfigurationTab());
 		}
 		return null;
 	}

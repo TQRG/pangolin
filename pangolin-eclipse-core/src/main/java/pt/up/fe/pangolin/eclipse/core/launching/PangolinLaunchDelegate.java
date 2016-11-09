@@ -14,8 +14,8 @@ import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate2;
 
-import pt.up.fe.pangolin.core.AgentConfigs;
 import pt.up.fe.pangolin.eclipse.core.Configuration;
+import pt.up.fe.pangolin.eclipse.core.PluginAgentConfigs;
 
 public class PangolinLaunchDelegate implements ILaunchConfigurationDelegate2, IExecutableExtension {
 
@@ -52,11 +52,11 @@ public class PangolinLaunchDelegate implements ILaunchConfigurationDelegate2, IE
 			
 			Configuration pluginConfiguration = Configuration.get();
 			if (pluginConfiguration.getLaunchesListener().isEmpty()) {
-				AgentConfigs agentConfigs = new AgentConfigs();
+				PluginAgentConfigs agentConfigs = PluginAgentConfigs.getConfigs(configuration);
 				agentConfigs.setPort(pluginConfiguration.getServerPort());
 				newConfiguration = new VMArgsLaunchConfiguration(configuration, Configuration.get().getAgentArg(agentConfigs));
-				
 				pluginConfiguration.getLaunchesListener().setCurrentLaunch(launch);
+				//set last execution in pluginConfiguration ( agentConfigs, launch , project(?) )
 			}
 			
 			launchDelegate.launch(newConfiguration, ILaunchManager.RUN_MODE, launch, monitor);	
