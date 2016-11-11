@@ -5,10 +5,12 @@ import java.net.URL;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.jdt.core.IJavaProject;
 
 import pt.up.fe.pangolin.core.AgentConfigs;
 import pt.up.fe.pangolin.eclipse.core.launching.LaunchesListener;
 import pt.up.fe.pangolin.eclipse.core.messaging.InstrumentationServer;
+import pt.up.fe.pangolin.eclipse.core.visualization.VisualizationBrowser;
 import pt.up.fe.pangolin.eclipse.runtime.Agent;
 
 public class Configuration {
@@ -16,6 +18,7 @@ public class Configuration {
 	private String agentPath;
 	private InstrumentationServer server;
 	private LaunchesListener launchesListener;
+	private VisualizationBrowser visualizationBrowser;
 	
 	private static Configuration configuration;
 	public static Configuration get() {
@@ -74,5 +77,16 @@ public class Configuration {
 	
 	public LaunchesListener getLaunchesListener() {
 		return launchesListener;
+	}
+	
+	public void setVisualizationBrowser(VisualizationBrowser browser) {
+		visualizationBrowser = browser;
+	}
+	
+	public void initializeVisualization(IJavaProject project, String jsonMessage) {
+		VisualizationBrowser.revealView();
+		if (visualizationBrowser != null) {
+			visualizationBrowser.callInitializeVisualization(project, jsonMessage);
+		}
 	}
 }

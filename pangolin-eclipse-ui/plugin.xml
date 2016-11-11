@@ -115,4 +115,19 @@
          </launchMode>
       </launchConfigurationTabGroup>
    </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="pt.up.fe.pangolin.eclipse.ui.viewCategory"
+            name="%viewCategory.label">
+      </category>
+      <view
+            category="pt.up.fe.pangolin.eclipse.ui.viewCategory"
+            class="pt.up.fe.pangolin.eclipse.ui.views.VisualizationView"
+            icon="icons/crowbar.png"
+            id="pt.up.fe.pangolin.eclipse.ui.visualizationView"
+            name="%visualizationView.label"
+            restorable="true">
+      </view>
+   </extension>
 </plugin>

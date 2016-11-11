@@ -13,6 +13,8 @@ Require-Bundle: org.eclipse.jdt.launching;bundle-version="3.7.0",
  org.eclipse.jface.text,
  org.eclipse.ui.editors,
  org.eclipse.debug.ui
-Export-Package: pt.up.fe.pangolin.eclipse.core.launching
+Export-Package: pt.up.fe.pangolin.eclipse.core, 
+ pt.up.fe.pangolin.eclipse.core.launching,
+ pt.up.fe.pangolin.eclipse.core.visualization
 Bundle-ClassPath: .,
  lib/pt.up.fe.pangolin.eclipse.runtime.jar
