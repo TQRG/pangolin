@@ -47,9 +47,9 @@ public class Collector {
 		return this.builder;
 	}
 
-	public synchronized Node createNode(Node parent, String name, Type type) {
-		Node node = tree.addNode(name, type, parent.getId());
-		listener.addNode(node.getId(), name, type, parent.getId());
+	public synchronized Node createNode(Node parent, String name, Type type, int line) {
+		Node node = tree.addNode(name, type, parent.getId(), line);
+		listener.addNode(node.getId(), name, type, parent.getId(), line);
 		return node;
 	}
 

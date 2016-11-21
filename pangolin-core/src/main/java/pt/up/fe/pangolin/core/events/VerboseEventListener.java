@@ -17,8 +17,8 @@ public class VerboseEventListener implements EventListener {
 	}
 
 	@Override
-	public void addNode(int id, String name, Type type, int parentId) {
-		System.out.println("Add Node " + id + " " + name + " " + type + " " + parentId);
+	public void addNode(int id, String name, Type type, int parentId, int line) {
+		System.out.println("Add Node " + id + " " + name + " " + type + " " + parentId + " " + line);
 	}
 
 	@Override

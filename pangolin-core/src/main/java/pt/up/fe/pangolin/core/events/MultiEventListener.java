@@ -33,9 +33,9 @@ public class MultiEventListener implements EventListener {
 	}
 
 	@Override
-	public void addNode(int id, String name, Type type, int parentId) {
+	public void addNode(int id, String name, Type type, int parentId, int line) {
 		for(EventListener el : eventListeners) {
-			el.addNode(id, name, type, parentId);
+			el.addNode(id, name, type, parentId, line);
 		}
 	}
 

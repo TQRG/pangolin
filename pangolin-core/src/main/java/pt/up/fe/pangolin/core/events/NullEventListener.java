@@ -13,7 +13,7 @@ public class NullEventListener implements EventListener {
 	}
 
 	@Override
-	public void addNode(int id, String name, Type type, int parentId) {
+	public void addNode(int id, String name, Type type, int parentId, int line) {
 	}
 
 	@Override

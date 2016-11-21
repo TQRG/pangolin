@@ -22,11 +22,11 @@ public abstract class AbstractGranularity implements Granularity {
 		this.ci = ci;
 	}
 	
-	private Node getNode(Collector c, Node parent, String name, Node.Type type) {
+	private Node getNode(Collector c, Node parent, String name, Node.Type type, int line) {
 		Node node = parent.getChild(name);
 		
 		if (node == null) {
-			node = c.createNode(parent, name, type);
+			node = c.createNode(parent, name, type, line);
 		}
 		
 		return node;
@@ -44,7 +44,7 @@ public abstract class AbstractGranularity implements Granularity {
             StringTokenizer stok = new StringTokenizer(tok.substring(0, pkgEnd), ".");
 
             while (stok.hasMoreTokens()) {
-                node = getNode(c, node, stok.nextToken(), Node.Type.PACKAGE);
+                node = getNode(c, node, stok.nextToken(), Node.Type.PACKAGE, -1);
             }
         } 
         else {
@@ -57,7 +57,7 @@ public abstract class AbstractGranularity implements Granularity {
 
         while (stok.hasMoreTokens()) {
             tok = stok.nextToken();
-            node = getNode(c, node, tok, Node.Type.CLASS);
+            node = getNode(c, node, tok, Node.Type.CLASS, -1);
         }
 
 
@@ -68,14 +68,20 @@ public abstract class AbstractGranularity implements Granularity {
 		Collector c = Collector.instance();
 		Node parent = getNode(cls);
 		
-		return getNode(c, parent, m.getName() + Descriptor.toString(m.getSignature()), Node.Type.METHOD);
+		return getNode(c, parent, m.getName() + Descriptor.toString(m.getSignature()), Node.Type.METHOD, -1);
 	}
 	
 	public Node getNode(CtClass cls, CtBehavior m, int line) {
 		Collector c = Collector.instance();
 		Node parent = getNode(cls, m);
 		
-		return getNode(c, parent, String.valueOf(line), Node.Type.LINE);
+		return getNode(c, parent, String.valueOf(line), Node.Type.LINE, line);
 	}
 	
+	public Node getMethodNode(CtClass cls, CtBehavior m, int line) {
+		Collector c = Collector.instance();
+		Node parent = getNode(cls);
+		
+		return getNode(c, parent, m.getName() + Descriptor.toString(m.getSignature()), Node.Type.METHOD, line);
+	}
 }

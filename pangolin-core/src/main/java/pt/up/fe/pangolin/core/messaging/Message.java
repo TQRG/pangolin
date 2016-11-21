@@ -51,16 +51,18 @@ public interface Message {
 		public final String name;
 		public Type type;
 		public final int parentId;
+		public final int line;
 
-		public AddNodeMessage(int id, String name, Type type, int parentId) {
+		public AddNodeMessage(int id, String name, Type type, int parentId, int line) {
 			this.id = id;
 			this.name = name;
 			this.type = type;
 			this.parentId = parentId;
+			this.line = line;
 		}
 
 		protected AddNodeMessage() {
-			this(-1,null,null,-1);
+			this(-1,null,null,-1,-1);
 		}
 	}
 

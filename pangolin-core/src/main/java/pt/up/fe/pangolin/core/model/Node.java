@@ -26,13 +26,15 @@ public class Node {
 	private int id;
 	private int depth;
 	private Node parent;
+	private int line;
 	private List<Node> children = new ArrayList<Node> ();
 
-	Node (String name, Type type, int id, Node parent) {
+	Node (String name, Type type, int id, Node parent, int line) {
 		this.type = type;
 		this.name = name;
 		this.id = id;
 		this.parent = parent;
+		this.line = line;
 
 		if (isRoot())
 			this.depth = 0;
@@ -90,6 +92,10 @@ public class Node {
 
 	public Type getType() {
 		return type;
+	}
+	
+	public int getLine() {
+		return line;
 	}
 
 	public List<Node> getChildren() {
@@ -161,4 +167,14 @@ public class Node {
 		}
 		return false;
 	}
+	
+	public String getFullNameWithSymbol (int fromDepth) {
+        Node p = getParent();
+
+
+        if (p == null || getDepth() <= fromDepth)
+            return getName();
+
+        return p.getFullNameWithSymbol(fromDepth) + p.getType().getSymbol() + getName();
+    }
 }

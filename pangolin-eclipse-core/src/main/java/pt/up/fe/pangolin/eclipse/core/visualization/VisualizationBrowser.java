@@ -42,7 +42,7 @@ public class VisualizationBrowser {
 		this.browser = new Browser(parent, SWT.NONE);
 		this.viewPart = viewPart;
 		this.browser.setJavascriptEnabled(true);
-		//new TriggerEventHandler(this);
+		new TriggerEventHandler(this);
 		
 		this.browser.addProgressListener(new ProgressListener() {
 

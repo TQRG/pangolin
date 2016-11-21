@@ -33,8 +33,8 @@ public class ExecutionDescription implements EventListener {
 	}
 
 	@Override
-	public void addNode(int id, String name, Type type, int parentId) {
-		delegate.addNode(id, name, type, parentId);
+	public void addNode(int id, String name, Type type, int parentId, int line) {
+		delegate.addNode(id, name, type, parentId, line);
 	}
 
 	@Override
@@ -52,9 +52,12 @@ public class ExecutionDescription implements EventListener {
 		return delegate;
 	}
 
+	public Spectrum getSpectrum() {
+		return delegate.getSpectrum();
+	}
 	
 	private void diagnose() {
-		Spectrum s = delegate.getSpectrum();
+		Spectrum s = getSpectrum();
 		
 		Tree t = s.getTree();
 		int size = t.size();
