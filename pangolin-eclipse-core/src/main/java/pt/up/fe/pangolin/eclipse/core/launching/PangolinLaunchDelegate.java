@@ -13,6 +13,8 @@ import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate2;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.launching.AbstractJavaLaunchConfigurationDelegate;
 
 import pt.up.fe.pangolin.eclipse.core.Configuration;
 import pt.up.fe.pangolin.eclipse.core.PluginAgentConfigs;
@@ -52,10 +54,21 @@ public class PangolinLaunchDelegate implements ILaunchConfigurationDelegate2, IE
 			
 			Configuration pluginConfiguration = Configuration.get();
 			if (pluginConfiguration.getLaunchesListener().isEmpty()) {
+				
+				IJavaProject project = null;
+				
+				if(launchDelegate2 != null && launchDelegate2 instanceof AbstractJavaLaunchConfigurationDelegate) {
+					project = ((AbstractJavaLaunchConfigurationDelegate)launchDelegate2).getJavaProject(configuration);
+				}
+				
 				PluginAgentConfigs agentConfigs = PluginAgentConfigs.getConfigs(configuration);
 				agentConfigs.setPort(pluginConfiguration.getServerPort());
+				
 				newConfiguration = new VMArgsLaunchConfiguration(configuration, Configuration.get().getAgentArg(agentConfigs));
 				pluginConfiguration.getLaunchesListener().setCurrentLaunch(launch);
+				
+				pluginConfiguration.setExecutionDescription(new ExecutionDescription(configuration.getType(), project));
+				
 				//set last execution in pluginConfiguration ( agentConfigs, launch , project(?) )
 			}
 			

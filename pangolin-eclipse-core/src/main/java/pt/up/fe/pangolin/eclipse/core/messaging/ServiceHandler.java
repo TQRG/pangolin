@@ -1,14 +1,20 @@
 package pt.up.fe.pangolin.eclipse.core.messaging;
 
 import pt.up.fe.pangolin.core.events.EventListener;
-import pt.up.fe.pangolin.core.events.VerboseEventListener;
 import pt.up.fe.pangolin.core.messaging.Service;
+import pt.up.fe.pangolin.eclipse.core.Configuration;
 
 public class ServiceHandler implements Service {
+	
+	private EventListener eventListener;
+	
+	public ServiceHandler(EventListener eventListener) {
+		this.eventListener = eventListener;
+	}
 
 	@Override
 	public EventListener getEventListener() {
-		return new VerboseEventListener();
+		return eventListener;
 	}
 
 	@Override
@@ -23,7 +29,7 @@ public class ServiceHandler implements Service {
 		
 		@Override
 		public Service create(String id) {
-			return new ServiceHandler();
+			return new ServiceHandler(Configuration.get().getEventListener());
 		}
 	}
 

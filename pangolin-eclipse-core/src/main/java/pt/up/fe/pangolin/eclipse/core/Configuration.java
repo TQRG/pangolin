@@ -8,6 +8,9 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.jdt.core.IJavaProject;
 
 import pt.up.fe.pangolin.core.AgentConfigs;
+import pt.up.fe.pangolin.core.events.EventListener;
+import pt.up.fe.pangolin.core.events.NullEventListener;
+import pt.up.fe.pangolin.eclipse.core.launching.ExecutionDescription;
 import pt.up.fe.pangolin.eclipse.core.launching.LaunchesListener;
 import pt.up.fe.pangolin.eclipse.core.messaging.InstrumentationServer;
 import pt.up.fe.pangolin.eclipse.core.visualization.VisualizationBrowser;
@@ -19,7 +22,8 @@ public class Configuration {
 	private InstrumentationServer server;
 	private LaunchesListener launchesListener;
 	private VisualizationBrowser visualizationBrowser;
-	
+	private ExecutionDescription executionDescription;
+
 	private static Configuration configuration;
 	public static Configuration get() {
 		if(configuration == null)
@@ -88,5 +92,20 @@ public class Configuration {
 		if (visualizationBrowser != null) {
 			visualizationBrowser.callInitializeVisualization(project, jsonMessage);
 		}
+	}
+	
+	public ExecutionDescription getExecutionDescription() {
+		return executionDescription;
+	}
+
+	public void setExecutionDescription(ExecutionDescription executionDescription) {
+		this.executionDescription = executionDescription;
+	}
+	
+	public EventListener getEventListener() {
+		if (executionDescription == null) {
+			return new NullEventListener();
+		}
+		return executionDescription;
 	}
 }
