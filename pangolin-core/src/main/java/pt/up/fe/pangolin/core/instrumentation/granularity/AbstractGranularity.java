@@ -68,7 +68,7 @@ public abstract class AbstractGranularity implements Granularity {
 		Collector c = Collector.instance();
 		Node parent = getNode(cls);
 		
-		return getNode(c, parent, m.getName() + Descriptor.toString(m.getSignature()), Node.Type.METHOD, -1);
+		return getNode(c, parent, getMethodName(m) + Descriptor.toString(m.getSignature()), Node.Type.METHOD, -1);
 	}
 	
 	public Node getNode(CtClass cls, CtBehavior m, int line) {
@@ -82,6 +82,17 @@ public abstract class AbstractGranularity implements Granularity {
 		Collector c = Collector.instance();
 		Node parent = getNode(cls);
 		
-		return getNode(c, parent, m.getName() + Descriptor.toString(m.getSignature()), Node.Type.METHOD, line);
+		return getNode(c, parent, getMethodName(m) + Descriptor.toString(m.getSignature()), Node.Type.METHOD, line);
+	}
+
+	private static String getMethodName(CtBehavior m) {
+		String name = m.getName();
+
+		int idx = name.lastIndexOf('$');
+		if (idx != -1) {
+			name = name.substring(idx);
+		}
+
+		return name;
 	}
 }
