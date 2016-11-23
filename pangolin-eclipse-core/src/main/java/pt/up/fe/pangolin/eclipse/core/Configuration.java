@@ -14,6 +14,7 @@ import pt.up.fe.pangolin.eclipse.core.launching.ExecutionDescription;
 import pt.up.fe.pangolin.eclipse.core.launching.LaunchesListener;
 import pt.up.fe.pangolin.eclipse.core.messaging.InstrumentationServer;
 import pt.up.fe.pangolin.eclipse.core.visualization.VisualizationBrowser;
+import pt.up.fe.pangolin.eclipse.core.visualization.tree.TransactionViewer;
 import pt.up.fe.pangolin.eclipse.runtime.Agent;
 
 public class Configuration {
@@ -23,6 +24,7 @@ public class Configuration {
 	private LaunchesListener launchesListener;
 	private VisualizationBrowser visualizationBrowser;
 	private ExecutionDescription executionDescription;
+	private TransactionViewer transactionViewer;
 
 	private static Configuration configuration;
 	public static Configuration get() {
@@ -107,5 +109,14 @@ public class Configuration {
 			return new NullEventListener();
 		}
 		return executionDescription;
+	}
+
+	public void setTransactionViewer(TransactionViewer tv) {
+		this.transactionViewer = tv;
+	}
+
+	public TransactionViewer getTransactionViewer() {
+		TransactionViewer.revealView();
+		return transactionViewer;
 	}
 }

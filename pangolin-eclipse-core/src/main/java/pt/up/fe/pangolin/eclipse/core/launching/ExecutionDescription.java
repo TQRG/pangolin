@@ -9,6 +9,7 @@ import pt.up.fe.pangolin.core.model.Tree;
 import pt.up.fe.pangolin.core.spectrum.Spectrum;
 import pt.up.fe.pangolin.core.spectrum.SpectrumBuilder;
 import pt.up.fe.pangolin.eclipse.core.Configuration;
+import pt.up.fe.pangolin.eclipse.core.visualization.tree.TransactionTree;
 
 public class ExecutionDescription implements EventListener {
 
@@ -75,5 +76,6 @@ public class ExecutionDescription implements EventListener {
 		sb.append("]}");
 		
 		Configuration.get().initializeVisualization(project, sb.toString());
+		Configuration.get().getTransactionViewer().setInput(new TransactionTree(project, s, false));
 	}
 }
