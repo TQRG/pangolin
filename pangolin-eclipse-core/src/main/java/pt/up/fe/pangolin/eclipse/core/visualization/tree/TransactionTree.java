@@ -16,8 +16,8 @@ public class TransactionTree {
 	private IJavaProject project;
 
 	private TransactionTreeNode rootNode;
-	private Object[] rootNodes;
-	private Object[] children;
+	private TransactionTreeNode[] rootNodes;
+	private TransactionTreeNode[] children;
 
 	public TransactionTree(IJavaProject project, Spectrum spectrum, boolean isLocalJavaApplication) {
 		this.project = project;
@@ -25,26 +25,26 @@ public class TransactionTree {
 		this.isLocalJavaApplication = isLocalJavaApplication;
 
 		this.rootNode = new RootNode(this, null);
-		this.rootNodes = new Object[]{rootNode};
+		this.rootNodes = new TransactionTreeNode[]{rootNode};
 	}
 
 	public String getProjectName() {
 		return project.getElementName();
 	}
 
-	public Object[] getRootNodes() {
+	public TransactionTreeNode[] getRootNodes() {
 		return rootNodes;
 	}
 
-	public Object[] getChildren() {
+	public TransactionTreeNode[] getChildren() {
 		if (children == null) {
 			List<TransactionTreeNode> tmp = new ArrayList<TransactionTreeNode>();
 
 			for (int t = 0; t < spectrum.getTransactionsSize(); t++) {
-				tmp.add(new TestNode(this, rootNode, spectrum.getTransactionName(t), t));
+				tmp.add(new TestNode(this, rootNode, spectrum.getTransactionName(t), t, spectrum.isError(t)));
 			}
 
-			this.children = tmp.toArray();
+			this.children = tmp.toArray(new TransactionTreeNode[tmp.size()]);
 		}
 		return children;
 	}

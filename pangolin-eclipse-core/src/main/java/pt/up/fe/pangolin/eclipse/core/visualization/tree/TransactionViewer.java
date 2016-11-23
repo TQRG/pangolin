@@ -54,13 +54,18 @@ public class TransactionViewer {
 
 			@Override
 			public boolean isGrayed(Object element) {
-				// TODO Auto-generated method stub
+				if (element instanceof TransactionTreeNode) {
+					return ((TransactionTreeNode) element).isGrayed();
+				}
 				return false;
 			}
 
 			@Override
 			public boolean isChecked(Object element) {
-				return true;
+				if (element instanceof TransactionTreeNode) {
+					return ((TransactionTreeNode) element).isChecked();
+				}
+				return false;
 			}
 		});
 		
@@ -70,11 +75,11 @@ public class TransactionViewer {
 			@Override
 			public void checkStateChanged(CheckStateChangedEvent event) {
 				TransactionTreeNode element = (TransactionTreeNode) event.getElement();
-			    checkChildren(element, event.getChecked());
-			    checkParents( (TransactionTreeNode) element.getParent());
+				element.setChecked(event.getChecked());
+				tv.refresh();
 			}
 			
-			public void checkParents(TransactionTreeNode element) {
+			/*public void checkParents(TransactionTreeNode element) {
 			    if (element == null) {
 			        return;
 			    }
@@ -113,7 +118,7 @@ public class TransactionViewer {
 			        tv.setGrayed(element, false);
 			        tv.setSubtreeChecked(element, checked);
 			    }
-			}
+			}*/
 		});
 	}
 
@@ -123,6 +128,7 @@ public class TransactionViewer {
 			@Override
 			public void run() {
 				tv.setInput(t);
+				//tv.refresh();
 			}
 		});
 	}
