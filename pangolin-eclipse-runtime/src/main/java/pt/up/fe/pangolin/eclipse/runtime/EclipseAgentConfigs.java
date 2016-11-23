@@ -62,5 +62,9 @@ public class EclipseAgentConfigs extends AgentConfigs {
 			return null;
 		}
 	}
+
+	public boolean islocalJavaApplication() {
+		return Runtime.localJavaApplication == runtime;
+	}
 	
 }

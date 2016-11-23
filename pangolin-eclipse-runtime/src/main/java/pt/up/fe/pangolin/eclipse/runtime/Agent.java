@@ -24,8 +24,9 @@ public class Agent {
 			}
 		);
 		
-		System.out.println(agentConfigs.serialize());
-		System.out.println(agentArgs);
+		if (agentConfigs.islocalJavaApplication()) {
+			PangolinFrame.startFrame();
+		}
 	}
 
 }
