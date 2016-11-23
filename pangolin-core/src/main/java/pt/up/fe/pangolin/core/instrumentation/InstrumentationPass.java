@@ -53,6 +53,12 @@ public class InstrumentationPass implements Pass {
 		CodeAttribute ca = info.getCodeAttribute();
 		
 		if(ca != null) {
+
+			//skip synthetic methods
+			if ((b.getModifiers() & AccessFlag.SYNTHETIC) != 0) {
+				return;
+			}
+
 			CodeIterator ci = ca.iterator();
 
 			if (b instanceof CtConstructor) {
