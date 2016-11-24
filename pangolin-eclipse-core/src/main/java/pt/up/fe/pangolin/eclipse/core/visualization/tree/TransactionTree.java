@@ -1,6 +1,7 @@
 package pt.up.fe.pangolin.eclipse.core.visualization.tree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.jdt.core.IJavaProject;
@@ -47,5 +48,14 @@ public class TransactionTree {
 			this.children = tmp.toArray(new TransactionTreeNode[tmp.size()]);
 		}
 		return children;
+	}
+
+	public boolean[] getErrorVector() {
+		boolean[] errorVector = new boolean[spectrum.getTransactionsSize()];
+		Arrays.fill(errorVector, false);
+
+		rootNode.fillErrorVector(errorVector);
+
+		return errorVector;
 	}
 }

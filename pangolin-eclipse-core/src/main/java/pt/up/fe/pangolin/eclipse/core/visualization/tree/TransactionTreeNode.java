@@ -50,10 +50,10 @@ public abstract class TransactionTreeNode {
 
 		this.checked = false;
 		this.grayed = false;
-		
+
 		TransactionTreeNode[] children = getChildren();
 		if (children != null && children.length > 0) {
-			for (TransactionTreeNode child : getChildren()) {
+			for (TransactionTreeNode child : children) {
 				allChecked = allChecked && child.isChecked();
 				allUnchecked = allUnchecked && !child.isChecked();
 			}
@@ -78,7 +78,7 @@ public abstract class TransactionTreeNode {
 
 			TransactionTreeNode[] children = getChildren();
 			if (children != null) {
-				for (TransactionTreeNode child : getChildren()) {
+				for (TransactionTreeNode child : children) {
 					child.setChecked(value);
 				}
 			}
@@ -93,6 +93,15 @@ public abstract class TransactionTreeNode {
 		if (parent != null) {
 			parent.computeCheckedState();
 			parent.computeParentCheckedState();
+		}
+	}
+
+	public void fillErrorVector(boolean[] errorVector) {
+		TransactionTreeNode[] children = getChildren();
+		if (children != null) {
+			for (TransactionTreeNode child : children) {
+				child.fillErrorVector(errorVector);
+			}
 		}
 	}
 
@@ -132,6 +141,12 @@ public abstract class TransactionTreeNode {
 
 		public String getName() {
 			return name;
+		}
+
+		public void fillErrorVector(boolean[] errorVector) {
+			if (id >= 0 && id < errorVector.length) {
+				errorVector[id] = this.checked;
+			}
 		}
 	}
 
