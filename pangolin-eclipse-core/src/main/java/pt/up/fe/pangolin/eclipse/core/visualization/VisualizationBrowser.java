@@ -72,7 +72,7 @@ public class VisualizationBrowser {
 
 	private void callInitializeVisualization() {
 		if (lastJsonMessage != null) {
-			PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
+			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
 				@Override
 				public void run() {
 					browser.execute("initializeVisualization('"+lastJsonMessage+"')");

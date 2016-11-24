@@ -33,6 +33,7 @@ public class ExecutionDescription implements EventListener {
 		delegate.endTransaction(transactionName, activity, isError);
 
 		if(isLocalJavaApplication) {
+			diagnose();
 			notifyTransactionTree();
 		}
 	}
@@ -42,6 +43,7 @@ public class ExecutionDescription implements EventListener {
 		delegate.endTransaction(transactionName, activity, hashCode, isError);
 
 		if(isLocalJavaApplication) {
+			diagnose();
 			notifyTransactionTree();
 		}
 	}

@@ -16,7 +16,7 @@ public class TransactionTree {
 	private Spectrum spectrum;
 	private IJavaProject project;
 
-	private TransactionTreeNode rootNode;
+	private RootNode rootNode;
 	private TransactionTreeNode[] rootNodes;
 	private TransactionTreeNode[] children;
 
