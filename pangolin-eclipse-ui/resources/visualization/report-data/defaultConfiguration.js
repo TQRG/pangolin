@@ -6,10 +6,10 @@ DEFAULT_CONFIG = {
     filterMinProbability: 0,
     normalGradiante: [{
         color: "rgba(0,205,0,1)", //green
-        position: 50
+        position: 1
     }, {
         color: "rgba(255,255,0,1)", //yellow
-        position: 75
+        position: 50
     }, {
         color: "rgba(229,0,0,1)", //red
         position: 99
@@ -94,4 +94,4 @@ DEFAULT_CONFIG = {
     }
 };
 
-var CONFIG_VERSION = 'configv41';
+var CONFIG_VERSION = 'configv42';

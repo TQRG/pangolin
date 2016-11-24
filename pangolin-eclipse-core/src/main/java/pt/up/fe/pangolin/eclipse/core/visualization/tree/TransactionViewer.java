@@ -12,10 +12,13 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
+import pt.up.fe.pangolin.eclipse.core.launching.ExecutionDescription;
+
 public class TransactionViewer implements ICheckStateListener {
 
 	private ViewPart viewPart;
 	private CheckboxTreeViewer treeViewer;
+	private ExecutionDescription executionDescription;
 
 	public static TransactionViewer newTransactionViewer(Composite parent, ViewPart viewPart) {
 		return new TransactionViewer(parent, viewPart);
@@ -48,23 +51,21 @@ public class TransactionViewer implements ICheckStateListener {
 		this.treeViewer.addCheckStateListener(this);
 	}
 
-	public void setInput(final TransactionTree t) {
-		final CheckboxTreeViewer tv = this.treeViewer;
-		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
-			@Override
-			public void run() {
-				tv.setInput(t);
-				tv.expandAll();
-			}
-		});
-	}
+	public void setInput(final ExecutionDescription executionDescription) {
+		final boolean isSame = this.executionDescription == executionDescription;
+		this.executionDescription = executionDescription;
 
-	public void refresh() {
 		final CheckboxTreeViewer tv = this.treeViewer;
 		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 			@Override
 			public void run() {
-				tv.refresh();
+				if (isSame) {
+					tv.refresh();
+				}
+				else {
+					tv.setInput(executionDescription.getTransactionTree());
+				}
+				tv.expandAll();
 			}
 		});
 	}
@@ -80,6 +81,7 @@ public class TransactionViewer implements ICheckStateListener {
 		TransactionTreeNode element = (TransactionTreeNode) event.getElement();
 		element.setChecked(event.getChecked());
 		this.treeViewer.refresh();
+		this.executionDescription.diagnose();
 	}
 
 }

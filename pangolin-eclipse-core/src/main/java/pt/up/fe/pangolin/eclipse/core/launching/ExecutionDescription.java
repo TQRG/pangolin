@@ -17,23 +17,33 @@ import pt.up.fe.pangolin.eclipse.core.visualization.tree.TransactionTree;
 public class ExecutionDescription implements EventListener {
 
 	private SpectrumBuilder delegate;
-	private ILaunchConfigurationType type;
+	private boolean isLocalJavaApplication;
 	private IJavaProject project;
+	private TransactionTree transactionTree;
 
 	public ExecutionDescription(ILaunchConfigurationType type, IJavaProject project) {
-		this.type = type;
+		this.isLocalJavaApplication = "org.eclipse.jdt.launching.localJavaApplication".equals(type.getIdentifier());
 		this.project = project;
 		this.delegate = new SpectrumBuilder();
+		this.transactionTree = null;
 	}
 
 	@Override
 	public void endTransaction (String transactionName, boolean[] activity, boolean isError) {
 		delegate.endTransaction(transactionName, activity, isError);
+
+		if(isLocalJavaApplication) {
+			notifyTransactionTree();
+		}
 	}
 
 	@Override
 	public void endTransaction (String transactionName, boolean[] activity, int hashCode, boolean isError) {
 		delegate.endTransaction(transactionName, activity, hashCode, isError);
+
+		if(isLocalJavaApplication) {
+			notifyTransactionTree();
+		}
 	}
 
 	@Override
@@ -49,7 +59,11 @@ public class ExecutionDescription implements EventListener {
 	@Override
 	public void endSession() {
 		delegate.endSession();
-		diagnose();
+
+		if (!isLocalJavaApplication) {
+			diagnose();
+			notifyTransactionTree();
+		}
 	}
 
 	public EventListener getEventListener() {
@@ -60,29 +74,35 @@ public class ExecutionDescription implements EventListener {
 		return delegate.getSpectrum();
 	}
 
-	private void diagnose() {
+	public TransactionTree getTransactionTree() {
+		if (transactionTree == null) {
+			transactionTree = new TransactionTree(project, getSpectrum(), isLocalJavaApplication);
+		}
+		return transactionTree;
+	}
+
+	public synchronized void diagnose() {
 		Spectrum s = getSpectrum();
+		TransactionTree tt = getTransactionTree();
 
-		TransactionTree tt = new TransactionTree(project, s, false);
+		if (s.getTransactionsSize() > 0) {
+			boolean[] errorVector = tt.getErrorVector();
+			double[] diagnosis = SFL.diagnose(s, errorVector);
+			double[] treeDiagnosis = constructTreeDiagnosis(s, diagnosis);
 
-		boolean[] errorVector = tt.getErrorVector();
-		System.out.println("Error vector " + Arrays.toString(errorVector));
-		double[] diagnosis = SFL.diagnose(s, errorVector);
-		System.out.println("Diagnosis " + Arrays.toString(diagnosis));
-		double[] treeDiagnosis = constructTreeDiagnosis(s, diagnosis);
-		System.out.println("Tree Diagnosis " + Arrays.toString(treeDiagnosis));
+			Tree t = s.getTree();
+			StringBuilder sb = new StringBuilder("{\"type\":\"visualization\",");
+			sb.append(t.toString());
+			sb.append(",\"scores\":");
+			sb.append(Arrays.toString(treeDiagnosis));
+			sb.append("}");
 
-		Tree t = s.getTree();
+			Configuration.get().initializeVisualization(project, sb.toString());
+		}
+	}
 
-		StringBuilder sb = new StringBuilder("{\"type\":\"visualization\",");
-		sb.append(t.toString());
-		sb.append(",\"scores\":");
-		sb.append(Arrays.toString(treeDiagnosis));
-		sb.append("}");
-
-
-		Configuration.get().initializeVisualization(project, sb.toString());
-		Configuration.get().getTransactionViewer().setInput(tt);
+	private void notifyTransactionTree() {
+		Configuration.get().getTransactionViewer().setInput(this);
 	}
 
 	private static double[] constructTreeDiagnosis(Spectrum s, double[] diagnosis) {
@@ -95,4 +115,8 @@ public class ExecutionDescription implements EventListener {
 
 		return treeDiagnosis;
 	}
+
+	/*public boolean isLocalJavaApplication() {
+		return isLocalJavaApplication;
+	}*/
 }
