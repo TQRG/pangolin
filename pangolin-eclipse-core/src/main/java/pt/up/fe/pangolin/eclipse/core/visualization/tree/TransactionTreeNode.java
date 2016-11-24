@@ -105,6 +105,10 @@ public abstract class TransactionTreeNode {
 		}
 	}
 
+	public void handleDoubleClick() {
+
+	}
+
 	public static class RootNode extends TransactionTreeNode {
 
 		RootNode(TransactionTree transactionTree, TransactionTreeNode parent) {
@@ -131,6 +135,35 @@ public abstract class TransactionTreeNode {
 		private int id;
 
 		TestNode(TransactionTree transactionTree, TransactionTreeNode parent, String name, int id, boolean checked) {
+			super(transactionTree, parent);
+			this.name = name;
+			this.id = id;
+
+			this.grayed = false;
+			this.checked = checked;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void fillErrorVector(boolean[] errorVector) {
+			if (id >= 0 && id < errorVector.length) {
+				errorVector[id] = this.checked;
+			}
+		}
+
+		public void handleDoubleClick() {
+			System.out.println("Double clicked");
+		}
+	}
+
+	public static class ManualNode extends TransactionTreeNode {
+
+		private String name;
+		private int id;
+
+		ManualNode(TransactionTree transactionTree, TransactionTreeNode parent, String name, int id, boolean checked) {
 			super(transactionTree, parent);
 			this.name = name;
 			this.id = id;

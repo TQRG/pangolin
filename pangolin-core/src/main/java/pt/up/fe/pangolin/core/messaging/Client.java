@@ -89,15 +89,15 @@ public class Client implements EventListener {
 
 					message = getMessage();
 				} catch (Exception e) {
-					System.err.println("Exception, reseting socket");
-					e.printStackTrace();
+					//System.err.println("Exception, reseting socket");
+					//e.printStackTrace();
 
 					s = null;
 					try {
 						Thread.sleep(10000);
 					}
 					catch (Exception e2) {
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 				}
 			}

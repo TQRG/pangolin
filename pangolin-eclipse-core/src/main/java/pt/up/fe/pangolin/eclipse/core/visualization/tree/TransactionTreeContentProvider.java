@@ -5,7 +5,9 @@ import org.eclipse.jface.viewers.ICheckStateProvider;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.ITreeSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.graphics.Image;
 
@@ -109,7 +111,12 @@ public class TransactionTreeContentProvider implements
 
 	@Override
 	public void doubleClick(DoubleClickEvent event) {
-		System.out.println("double clicked " + event.getSelection());
-
+		ISelection selection = event.getSelection();
+		if (selection instanceof ITreeSelection) {
+			Object element = ((ITreeSelection)selection).getFirstElement();
+			if (element instanceof TransactionTreeNode) {
+				((TransactionTreeNode) element).handleDoubleClick();;
+			}
+		}
 	}
 }
