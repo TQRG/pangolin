@@ -6,6 +6,7 @@ import java.net.URL;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.swt.graphics.Image;
 
 import pt.up.fe.pangolin.core.AgentConfigs;
 import pt.up.fe.pangolin.core.events.EventListener;
@@ -25,6 +26,7 @@ public class Configuration {
 	private VisualizationBrowser visualizationBrowser;
 	private ExecutionDescription executionDescription;
 	private TransactionViewer transactionViewer;
+	private IActivator activator;
 
 	private static Configuration configuration;
 	public static Configuration get() {
@@ -118,5 +120,16 @@ public class Configuration {
 	public TransactionViewer getTransactionViewer() {
 		TransactionViewer.revealView();
 		return transactionViewer;
+	}
+
+	public void registerActivator(IActivator activator) {
+		this.activator = activator;
+	}
+
+	public Image getImage(String path) {
+		if (this.activator != null) {
+			return this.activator.getImageFromPath(path);
+		}
+		return null;
 	}
 }

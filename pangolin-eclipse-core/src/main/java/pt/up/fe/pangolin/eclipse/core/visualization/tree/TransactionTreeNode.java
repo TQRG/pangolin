@@ -1,6 +1,15 @@
 package pt.up.fe.pangolin.eclipse.core.visualization.tree;
 
+import org.eclipse.swt.graphics.Image;
+
+import pt.up.fe.pangolin.eclipse.core.Configuration;
+
 public abstract class TransactionTreeNode {
+
+	private static final String PROJECT_ICON = "icons/prj_obj.gif";
+	private static final String PACKAGE_ICON = "icons/package.gif";
+	private static final String CLASS_ICON = "icons/tsuite.png";
+	private static final String TEST_ICON = "icons/test.png";
 
 	protected TransactionTree transactionTree;
 	protected TransactionTreeNode parent;
@@ -109,6 +118,10 @@ public abstract class TransactionTreeNode {
 
 	}
 
+	public Image getImage() {
+		return null;
+	}
+
 	public static class RootNode extends TransactionTreeNode {
 
 		RootNode(TransactionTree transactionTree, TransactionTreeNode parent) {
@@ -126,6 +139,10 @@ public abstract class TransactionTreeNode {
 		public boolean hasChildren() {
 			TransactionTreeNode[] children = getChildren();
 			return children != null && getChildren().length > 0;
+		}
+
+		public Image getImage() {
+			return Configuration.get().getImage(PROJECT_ICON);
 		}
 	}
 
@@ -156,6 +173,10 @@ public abstract class TransactionTreeNode {
 		public void handleDoubleClick() {
 			System.out.println("Double clicked");
 		}
+
+		public Image getImage() {
+			return Configuration.get().getImage(TEST_ICON);
+		}
 	}
 
 	public static class ManualNode extends TransactionTreeNode {
@@ -181,6 +202,9 @@ public abstract class TransactionTreeNode {
 				errorVector[id] = this.checked;
 			}
 		}
-	}
 
+		public Image getImage() {
+			return Configuration.get().getImage(TEST_ICON);
+		}
+	}
 }

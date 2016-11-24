@@ -8,10 +8,13 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import pt.up.fe.pangolin.eclipse.core.Configuration;
+import pt.up.fe.pangolin.eclipse.core.IActivator;
+
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
+public class Activator extends AbstractUIPlugin implements IActivator {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "pt.up.fe.pangolin.eclipse.ui"; //$NON-NLS-1$
@@ -32,6 +35,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		Configuration.get().registerActivator(this);
 	}
 
 	/*
@@ -50,6 +54,10 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static Activator getDefault() {
 		return plugin;
+	}
+
+	public Image getImageFromPath(String path) {
+		return getImage(path);
 	}
 
 	/**

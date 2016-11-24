@@ -78,7 +78,9 @@ public class TransactionTreeContentProvider implements
 
 	@Override
 	public Image getImage(Object element) {
-		// TODO Auto-generated method stub
+		if (element instanceof TransactionTreeNode) {
+			return ((TransactionTreeNode) element).getImage();
+		}
 		return null;
 	}
 
