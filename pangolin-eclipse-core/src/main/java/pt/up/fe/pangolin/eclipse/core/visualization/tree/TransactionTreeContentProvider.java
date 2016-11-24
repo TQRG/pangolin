@@ -6,6 +6,7 @@ import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.graphics.Image;
 
 public class TransactionTreeContentProvider implements
@@ -13,7 +14,7 @@ public class TransactionTreeContentProvider implements
 
 	@Override
 	public Object[] getElements(Object inputElement) {
-		if (inputElement instanceof TransactionTree) {
+		if (inputElement != null && inputElement instanceof TransactionTree) {
 			return ((TransactionTree) inputElement).getRootNodes();
 		}
 		return null;
@@ -53,6 +54,11 @@ public class TransactionTreeContentProvider implements
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 
 	}
 

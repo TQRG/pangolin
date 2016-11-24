@@ -48,6 +48,9 @@ public abstract class TransactionTreeNode {
 		boolean allChecked = true;
 		boolean allUnchecked = true;
 
+		this.checked = false;
+		this.grayed = false;
+		
 		TransactionTreeNode[] children = getChildren();
 		if (children != null && children.length > 0) {
 			for (TransactionTreeNode child : getChildren()) {
