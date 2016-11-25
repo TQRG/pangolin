@@ -117,8 +117,4 @@ public class ExecutionDescription implements EventListener {
 
 		return treeDiagnosis;
 	}
-
-	/*public boolean isLocalJavaApplication() {
-		return isLocalJavaApplication;
-	}*/
 }

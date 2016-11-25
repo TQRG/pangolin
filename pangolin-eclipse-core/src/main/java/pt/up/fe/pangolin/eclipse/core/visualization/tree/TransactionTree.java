@@ -9,7 +9,6 @@ import org.eclipse.jdt.core.IJavaProject;
 import pt.up.fe.pangolin.core.spectrum.Spectrum;
 import pt.up.fe.pangolin.eclipse.core.visualization.tree.TransactionTreeNode.ManualNode;
 import pt.up.fe.pangolin.eclipse.core.visualization.tree.TransactionTreeNode.RootNode;
-import pt.up.fe.pangolin.eclipse.core.visualization.tree.TransactionTreeNode.TestNode;
 
 public class TransactionTree {
 
@@ -26,12 +25,16 @@ public class TransactionTree {
 		this.spectrum = spectrum;
 		this.isLocalJavaApplication = isLocalJavaApplication;
 
-		this.rootNode = new RootNode(this, null);
+		this.rootNode = new RootNode(this);
 		this.rootNodes = new TransactionTreeNode[]{rootNode};
 	}
 
 	public String getProjectName() {
 		return project.getElementName();
+	}
+
+	public IJavaProject getProject() {
+		return project;
 	}
 
 	public TransactionTreeNode[] getRootNodes() {
@@ -40,15 +43,15 @@ public class TransactionTree {
 
 	public TransactionTreeNode[] getChildren() {
 		if (children == null) {
-			List<TransactionTreeNode> tmp = new ArrayList<TransactionTreeNode>();
+			List<TransactionTreeNode> tmp;
 
-			for (int t = 0; t < spectrum.getTransactionsSize(); t++) {
-				if (isLocalJavaApplication) {
+			if (isLocalJavaApplication) {
+				tmp = new ArrayList<TransactionTreeNode>();
+				for (int t = 0; t < spectrum.getTransactionsSize(); t++) {
 					tmp.add(new ManualNode(this, rootNode, spectrum.getTransactionName(t), t, spectrum.isError(t)));
 				}
-				else {
-					tmp.add(new TestNode(this, rootNode, spectrum.getTransactionName(t), t, spectrum.isError(t)));
-				}
+			} else {
+				tmp = rootNode.addTests(spectrum);
 			}
 
 			this.children = tmp.toArray(new TransactionTreeNode[tmp.size()]);

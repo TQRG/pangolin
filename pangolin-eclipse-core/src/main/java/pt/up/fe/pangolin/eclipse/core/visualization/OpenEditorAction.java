@@ -1,6 +1,8 @@
 package pt.up.fe.pangolin.eclipse.core.visualization;
 
+import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jface.text.IDocument;
@@ -30,6 +32,32 @@ public class OpenEditorAction {
 						IDocument document = textEditor.getDocumentProvider().getDocument(textEditor.getEditorInput());
 						textEditor.selectAndReveal(document.getLineOffset(lineNumber-1), 0);
 					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+	}
+
+	public static void openElement(final IJavaProject project, final String element, final String method) {
+		PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				try {
+
+					IType type = project.findType(element);
+					IJavaElement e = type;
+
+					for (IMethod m : type.getMethods()) {
+						if (m.getElementName().equals(method)) {
+							e = m;
+							break;
+						}
+					}
+
+					JavaUI.openInEditor(e);
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
