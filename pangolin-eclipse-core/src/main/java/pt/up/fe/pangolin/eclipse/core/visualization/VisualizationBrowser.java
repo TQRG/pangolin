@@ -15,6 +15,7 @@ public class VisualizationBrowser {
 
 	private IJavaProject currentProject = null;
 	private ViewPart viewPart = null;
+	private String url = null;
 
 	private static String lastJsonMessage = null;
 
@@ -56,8 +57,9 @@ public class VisualizationBrowser {
 			}
 		});
 
+		this.url = VisualizationResource.get();
 		try {
-			setUrl(VisualizationResource.get());
+			setUrl();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,7 +69,7 @@ public class VisualizationBrowser {
 		currentProject = project;
 		lastJsonMessage = jsonMessage;
 		
-		callInitializeVisualization();
+		setUrl();
 	}
 
 	private void callInitializeVisualization() {
@@ -99,11 +101,10 @@ public class VisualizationBrowser {
 		});
 	}
 
-	public void setUrl(final String url) {
+	public void setUrl() {
 		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 			@Override
 			public void run() {
-
 				browser.setUrl(url);
 			}
 		});
