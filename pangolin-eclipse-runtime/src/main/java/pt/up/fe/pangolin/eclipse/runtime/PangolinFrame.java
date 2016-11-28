@@ -147,7 +147,7 @@ public class PangolinFrame extends JFrame {
 		this.dissociatedTransactions++;
 		inTransaction = false;
 		
-		Collector.instance().endTransaction("Dissociated Transaction #" + Integer.toString(this.dissociatedTransactions), true);
+		Collector.instance().endTransaction("Dissociated Transaction #" + Integer.toString(this.dissociatedTransactions), false);
 		updateInformation();
 	}
 
@@ -155,7 +155,7 @@ public class PangolinFrame extends JFrame {
 		this.associatedTransactions++;
 		inTransaction = false;
 
-		Collector.instance().endTransaction("Associated Transaction #" + Integer.toString(this.associatedTransactions), false);
+		Collector.instance().endTransaction("Associated Transaction #" + Integer.toString(this.associatedTransactions), true);
 		updateInformation();
 	}
 
