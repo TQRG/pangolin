@@ -137,6 +137,17 @@ public abstract class TransactionTreeNode {
 		return null;
 	}
 
+	public String getToolTip() {
+		if (this.checked) {
+			return "Uncheck To Dissociate " + getElementName();
+		}
+		else {
+			return "Check To Associate " + getElementName();
+		}
+	}
+
+	protected abstract String getElementName();
+
 	public static class RootNode extends TransactionTreeNode {
 
 		RootNode(TransactionTree transactionTree) {
@@ -190,6 +201,11 @@ public abstract class TransactionTreeNode {
 
 			return new ArrayList<TransactionTreeNode>(nodeMap.values());
 		}
+
+		@Override
+		protected String getElementName() {
+			return "Project";
+		}
 	}
 
 	public static class PackageNode extends TransactionTreeNode {
@@ -230,6 +246,11 @@ public abstract class TransactionTreeNode {
 
 		public boolean hasChildren() {
 			return !children.isEmpty();
+		}
+
+		@Override
+		protected String getElementName() {
+			return "Package";
 		}
 	}
 
@@ -274,6 +295,11 @@ public abstract class TransactionTreeNode {
 			OpenEditorAction.openElement(transactionTree.getProject(), fullyQualifiedName);
 		}
 
+		@Override
+		protected String getElementName() {
+			return "Test Class";
+		}
+
 	}
 
 	public static class TestNode extends TransactionTreeNode {
@@ -307,6 +333,11 @@ public abstract class TransactionTreeNode {
 		public Image getImage() {
 			return Configuration.get().getImage(TEST_ICON);
 		}
+
+		@Override
+		protected String getElementName() {
+			return "Test";
+		}
 	}
 
 	public static class ManualNode extends TransactionTreeNode {
@@ -329,6 +360,11 @@ public abstract class TransactionTreeNode {
 
 		public Image getImage() {
 			return Configuration.get().getImage(TEST_ICON);
+		}
+
+		@Override
+		protected String getElementName() {
+			return "Transaction";
 		}
 	}
 }

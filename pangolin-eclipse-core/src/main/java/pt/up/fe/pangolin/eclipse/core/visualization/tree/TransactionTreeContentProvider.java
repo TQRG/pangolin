@@ -1,5 +1,6 @@
 package pt.up.fe.pangolin.eclipse.core.visualization.tree;
 
+import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.ICheckStateProvider;
 import org.eclipse.jface.viewers.IDoubleClickListener;
@@ -9,10 +10,12 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.ITreeSelection;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 
-public class TransactionTreeContentProvider implements
-		ITreeContentProvider, ILabelProvider, ICheckStateProvider, IDoubleClickListener {
+public class TransactionTreeContentProvider extends CellLabelProvider implements
+		ITreeContentProvider, ICheckStateProvider, IDoubleClickListener {
 
 	@Override
 	public Object[] getElements(Object inputElement) {
@@ -76,7 +79,6 @@ public class TransactionTreeContentProvider implements
 
 	}
 
-	@Override
 	public Image getImage(Object element) {
 		if (element instanceof TransactionTreeNode) {
 			return ((TransactionTreeNode) element).getImage();
@@ -84,7 +86,6 @@ public class TransactionTreeContentProvider implements
 		return null;
 	}
 
-	@Override
 	public String getText(Object element) {
 		if (element instanceof TransactionTreeNode) {
 			return ((TransactionTreeNode) element).getName();
@@ -120,5 +121,34 @@ public class TransactionTreeContentProvider implements
 				((TransactionTreeNode) element).handleDoubleClick();;
 			}
 		}
+	}
+
+	@Override
+	public void update(ViewerCell cell) {
+		cell.setText(getText(cell.getElement()));
+		cell.setImage(getImage(cell.getElement()));
+	}
+
+	@Override
+	public String getToolTipText(Object element) {
+		if (element instanceof TransactionTreeNode) {
+			return ((TransactionTreeNode)element).getToolTip();
+		}
+		return null;
+	}
+
+	@Override
+	public Point getToolTipShift(Object object) {
+		return new Point(5,5);
+	}
+
+	@Override
+	public int getToolTipDisplayDelayTime(Object object) {
+		return 1000;
+	}
+
+	@Override
+	public int getToolTipTimeDisplayed(Object object) {
+		return 5000;
 	}
 }

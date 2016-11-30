@@ -2,10 +2,8 @@ package pt.up.fe.pangolin.eclipse.core.visualization.tree;
 
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
-import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
 import org.eclipse.jface.viewers.ICheckStateListener;
-import org.eclipse.jface.viewers.ICheckStateProvider;
-import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.PartInitException;
@@ -41,6 +39,7 @@ public class TransactionViewer implements ICheckStateListener {
 	public TransactionViewer(Composite parent, ViewPart viewPart) {
 		this.viewPart = viewPart;
 		this.treeViewer = new CheckboxTreeViewer(parent, SWT.NONE);
+		ColumnViewerToolTipSupport.enableFor(this.treeViewer);
 
 		TransactionTreeContentProvider contentProvider = new TransactionTreeContentProvider();
 		this.treeViewer.setContentProvider(contentProvider);
