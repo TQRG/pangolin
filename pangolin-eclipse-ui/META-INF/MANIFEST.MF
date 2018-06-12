@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Pangolin plugin UI
-Bundle-SymbolicName: pangolin-eclipse-ui;singleton:=true
+Bundle-SymbolicName: pt.up.fe.pangolin.eclipse.ui;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Activator: pt.up.fe.pangolin.eclipse.ui.Activator
 Require-Bundle: org.eclipse.ui,
- pangolin-eclipse-core;bundle-version="0.0.0",
+ pt.up.fe.pangolin.eclipse.core;bundle-version="0.0.0",
  org.eclipse.debug.ui,
  org.eclipse.core.runtime;bundle-version="3.9.0",
  org.eclipse.jdt.debug.ui;bundle-version="3.6.200",

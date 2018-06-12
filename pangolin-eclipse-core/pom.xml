@@ -8,7 +8,8 @@
         <relativePath>..</relativePath>
     </parent>
 
-    <artifactId>pangolin-eclipse-core</artifactId>
+    <name>pangolin-eclipse-core</name>
+    <artifactId>pt.up.fe.pangolin.eclipse.core</artifactId>
     <packaging>eclipse-plugin</packaging>
 
     <dependencies>

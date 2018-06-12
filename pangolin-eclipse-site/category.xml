@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="Pangolin Repository">
+   </description>
+   <feature url="features/pt.up.fe.pangolin.eclipse.feature_0.0.1.jar" id="pt.up.fe.pangolin.eclipse.feature" version="0.0.1">
+      <category name="pt.up.fe.pangolin.category"/>
+   </feature>
+   <category-def name="pt.up.fe.pangolin.category" label="Pangolin Feature Localization"/>
+</site>

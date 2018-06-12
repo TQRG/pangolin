@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Pangolin plugin Core
-Bundle-SymbolicName: pangolin-eclipse-core;singleton:=true
+Bundle-SymbolicName: pt.up.fe.pangolin.eclipse.core;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.jdt.launching;bundle-version="3.7.0",

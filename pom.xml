@@ -91,6 +91,8 @@
         <module>pangolin-eclipse-runtime</module>
         <module>pangolin-eclipse-core</module>
         <module>pangolin-eclipse-ui</module>
+        <module>pangolin-eclipse-feature</module>
+        <module>pangolin-eclipse-site</module>
   </modules>
 
 </project>

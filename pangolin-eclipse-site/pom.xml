@@ -8,8 +8,8 @@
         <relativePath>..</relativePath>
     </parent>
 
-    <name>pangolin-eclipse-ui</name>
-    <artifactId>pt.up.fe.pangolin.eclipse.ui</artifactId>
-    <packaging>eclipse-plugin</packaging>
+    <name>pangolin-eclipse-site</name>
+    <artifactId>pt.up.fe.pangolin.eclipse.site</artifactId>
+    <packaging>eclipse-repository</packaging>
 
 </project>
