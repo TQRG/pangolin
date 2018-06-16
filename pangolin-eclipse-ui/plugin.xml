@@ -134,7 +134,7 @@
             class="pt.up.fe.pangolin.eclipse.ui.views.TransactionView"
             icon="icons/crowbar.png"
             id="pt.up.fe.pangolin.eclipse.ui.transactionView"
-            name="Transactions View"
+            name="%transactionView.label"
             restorable="true">
       </view>
    </extension>
