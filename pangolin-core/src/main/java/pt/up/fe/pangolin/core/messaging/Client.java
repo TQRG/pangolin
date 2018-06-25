@@ -49,7 +49,7 @@ public class Client implements EventListener {
 
 	private void postBlockingMessage(Message m) {
 		try {
-			postMessage(new ByeMessage()).join(5000);
+			postMessage(m).join(120000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

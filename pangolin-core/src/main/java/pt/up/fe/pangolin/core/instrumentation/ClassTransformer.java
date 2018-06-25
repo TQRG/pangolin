@@ -54,7 +54,7 @@ public class ClassTransformer implements ClassFileTransformer {
 			return c.toBytecode();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 		return null;
