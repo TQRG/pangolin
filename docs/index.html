@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pangolin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous"/>
+
+    <style type="text/css">
+      body {
+          min-height: 75rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">Pangolin</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" data-target="#pangolin-navbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="pangolin-navbar">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#demo">Demo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#download">Download</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/tqrg/pangolin">Repository</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main role="main" class="container pt-3">
+      <div class="jumbotron mb-3">
+        <h1>Pangolin</h1>
+        <p class="lead">A software visualization toolset for program comprehension.</p>
+      </div>
+
+      <section id="about">
+        <div class="album">
+          <div class="container">
+            <h2>About Pangolin</h2>
+            <p>Pangolin is an Eclipse plugin for understanding software. This toolset is aimed at developers that need to evolve or maintain a software system. Pangolin uses a dynamic analysis method that identifies the topology of a functionality as well as its dependencies.</p>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <a href="sc1.png"><img class="card-img-top" src="sc1.png"></a>
+                  <div class="card-body pt-0">
+                    <p class="card-text mb-0"><b>Integrated into Eclipse</b></p>
+                    <p class="card-text">The toolset is provided as an Eclipse plugin. Integrates seamlessly with JUnit.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <a href="sc2.png"><img class="card-img-top" src="sc2.png"></a>
+                  <div class="card-body pt-0">
+                    <p class="card-text mb-0"><b>Sunburst Visualization</b></p>
+                    <p class="card-text">Source code is presented as a tree-based radial visualization.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <a href="sc3.png"><img class="card-img-top" src="sc3.png"></a>
+                  <div class="card-body pt-0">
+                    <p class="card-text mb-0"><b>Powerful Navigation</b></p>
+                    <p class="card-text">Many navigational options offered: zoom, pan, root-change, view-in-editor.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+      </section>
+
+      <section id="demo">
+        <div class="container">
+          <h2>Video Demonstration</h2>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zoPuB29QrgU"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section id="download">
+        <div class="container mt-4">
+          <h2>Download and Installation</h2>
+          <p>Within Eclipse, select the 'Install New Software' option and insert the repository URL <a href="https://tqrg.github.io/pangolin/">https://tqrg.github.io/pangolin/</a>. After that, select Pangolin from the list of plugins and follow the on-screen instructions to complete the installation.</p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="container mt-4">
+        <hr>
+        <p>&copy; <a href="https://tqrg.github.io/">TQRG</a> 2018</p>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	    integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+	    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+            integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+            crossorigin="anonymous"></script>
+
+  </body>
+</html>
