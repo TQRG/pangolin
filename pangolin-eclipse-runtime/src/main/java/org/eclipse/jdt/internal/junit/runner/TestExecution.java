@@ -23,7 +23,7 @@ public class TestExecution {
 
 	private IClassifiesThrowables fClassifier;
 
-	private ArrayList fStopListeners = new ArrayList();
+	private ArrayList<IStopListener> fStopListeners = new ArrayList<IStopListener>();
 
 	public TestExecution(IListensToTestExecutions listener,
 			IClassifiesThrowables classifier) {
@@ -45,7 +45,7 @@ public class TestExecution {
 
 	public void stop() {
 		fShouldStop = true;
-		for (Iterator iter = fStopListeners.iterator(); iter.hasNext();) {
+		for (Iterator<IStopListener> iter = fStopListeners.iterator(); iter.hasNext();) {
 			IStopListener listener = (IStopListener) iter.next();
 			listener.stop();
 		}
