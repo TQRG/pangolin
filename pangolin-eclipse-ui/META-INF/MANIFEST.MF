@@ -4,6 +4,7 @@ Bundle-Name: Pangolin plugin UI
 Bundle-SymbolicName: pt.up.fe.pangolin.eclipse.ui;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Activator: pt.up.fe.pangolin.eclipse.ui.Activator
+Automatic-Module-Name: pt.up.fe.pangolin.eclipse.ui
 Require-Bundle: org.eclipse.ui,
  pt.up.fe.pangolin.eclipse.core;bundle-version="0.0.0",
  org.eclipse.debug.ui,
