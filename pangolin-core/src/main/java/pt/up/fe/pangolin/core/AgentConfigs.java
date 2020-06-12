@@ -73,7 +73,7 @@ public class AgentConfigs {
 
 		// Ignores classes in particular packages
 		List<String> prefixes = new ArrayList<String> ();
-		Collections.addAll(prefixes, "javax.", "java.", "sun.", "com.sun.", "pt.up.fe.pangolin.");
+		Collections.addAll(prefixes, "javax.", "java.", "sun.", "com.sun.", "pt.up.fe.pangolin.", "com.intellij.");
 		prefixes.addAll(prefixesToFilter);
 
 		PrefixMatcher pMatcher = new PrefixMatcher(prefixes);
@@ -90,7 +90,7 @@ public class AgentConfigs {
 
 		instrumentationPasses.addAll(passesToPrepend);
 		instrumentationPasses.add(fp);
-		instrumentationPasses.add(new TestFilterPass());
+		// instrumentationPasses.add(new TestFilterPass());
 		instrumentationPasses.add(new InstrumentationPass(granularityLevel));
 		instrumentationPasses.add(new StackSizePass());
 

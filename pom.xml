@@ -82,7 +82,7 @@
                         </environment>
                     </environments>
                 </configuration>
-            </plugin>
+			</plugin>
         </plugins>
     </build>
 

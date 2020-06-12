@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Agent-Class: pt.up.fe.pangolin.core.runtime.Agent
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
+Premain-Class: pt.up.fe.pangolin.core.runtime.Agent
+
+
