@@ -13,8 +13,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.version>0.0.1.SNAPSHOT</project.version>
-        <kepler-repo.url>http://download.eclipse.org/releases/kepler</kepler-repo.url>
-        <tycho-version>0.20.0</tycho-version>
+        <kepler-repo.url>http://download.eclipse.org/releases/2019-06</kepler-repo.url>
+        <tycho-version>1.4.0</tycho-version>
     </properties>
 
     <repositories>
@@ -32,8 +32,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>

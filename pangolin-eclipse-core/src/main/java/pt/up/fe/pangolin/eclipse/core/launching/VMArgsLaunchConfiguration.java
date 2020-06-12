@@ -1,5 +1,6 @@
 package pt.up.fe.pangolin.eclipse.core.launching;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -210,6 +211,54 @@ public class VMArgsLaunchConfiguration implements ILaunchConfiguration {
 	@Override
 	public boolean isReadOnly() {
 		return delegate.isReadOnly();
+	}
+
+	@Override
+	public void delete(int arg0) throws CoreException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getKind() throws CoreException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ILaunchConfiguration getPrototype() throws CoreException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<ILaunchConfiguration> getPrototypeChildren() throws CoreException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<String> getPrototypeVisibleAttributes() throws CoreException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAttributeModified(String arg0) throws CoreException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isPrototype() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setPrototypeAttributeVisibility(String arg0, boolean arg1) throws CoreException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
