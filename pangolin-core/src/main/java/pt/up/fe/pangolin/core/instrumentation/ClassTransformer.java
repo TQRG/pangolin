@@ -1,8 +1,6 @@
 package pt.up.fe.pangolin.core.instrumentation;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
@@ -30,9 +28,11 @@ public class ClassTransformer implements ClassFileTransformer {
 
 		CtClass c = null;
 		ClassPool cp = null;
+
 		try {
 
 			cp = ClassPool.getDefault();
+
 			c = cp.makeClass(new ByteArrayInputStream(classfileBuffer));
 
 			for (Pass p : instrumentationPasses) {
@@ -57,13 +57,20 @@ public class ClassTransformer implements ClassFileTransformer {
 				}
 
 			}
-			CtClass clazz = cp.makeClass("org.argouml.application.Main");
-			clazz.getClassInitializer().insertBefore("System.setProperty(\"log4j.configuration\", null");
-			clazz.toClass();
+			c.writeFile(".");
+
 			return c.toBytecode();
 		}
 		catch (Exception e) {
 			// e.printStackTrace();
+			try {
+				PrintWriter pr = new PrintWriter(new FileOutputStream(new File("./log.txt"), true));
+				pr.append(e.getMessage() + "\n");
+				pr.close();
+			} catch (FileNotFoundException fileNotFoundException) {
+				// fileNotFoundException.printStackTrace();
+			}
+
 		}
 
 		return null;

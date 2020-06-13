@@ -73,7 +73,7 @@ public class AgentConfigs {
 
 		// Ignores classes in particular packages
 		List<String> prefixes = new ArrayList<String> ();
-		Collections.addAll(prefixes, "javax.", "java.", "sun.", "com.sun.", "pt.up.fe.pangolin.", "com.intellij.");
+		Collections.addAll(prefixes, "javax.", "java.", "sun.", "com.sun.", "pt.up.fe.pangolin.", "com.intellij.", "org.apache.log4j.");
 		prefixes.addAll(prefixesToFilter);
 
 		PrefixMatcher pMatcher = new PrefixMatcher(prefixes);

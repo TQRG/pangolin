@@ -19,16 +19,18 @@ public class Node {
 		public String getSymbol () {
 			return symbol;
 		}
-	}
 
+
+	}
 	private Type type;
 	private String name;
+
+	private String packageName;
 	private int id;
 	private int depth;
 	private Node parent;
 	private int line;
 	private List<Node> children = new ArrayList<Node> ();
-
 	Node (String name, Type type, int id, Node parent, int line) {
 		this.type = type;
 		this.name = name;
@@ -43,7 +45,6 @@ public class Node {
 			parent.addChild(this);
 		}
 	}
-
 	private void addChild(Node node) {
 		children.add(node);
 	}
@@ -93,7 +94,7 @@ public class Node {
 	public Type getType() {
 		return type;
 	}
-	
+
 	public int getLine() {
 		return line;
 	}
@@ -152,6 +153,36 @@ public class Node {
 		return p.getFullName() + getSymbol(p.type, type) + name;
 	}
 
+	public String getPackageName() {
+		Node p = getParent();
+
+		if (p == null || p.isRoot())
+			return name;
+
+		if (!getType().equals(Type.PACKAGE))
+			return p.getPackageName();
+
+		return p.getPackageName() + Type.PACKAGE.getSymbol() + name;
+	}
+
+	public String getClassName() {
+		Node p = getParent();
+
+		if (p == null || p.isRoot() || getType().equals(Type.CLASS))
+			return name;
+
+		return p.getClassName();
+	}
+
+	public String getMethodName() {
+		Node p = getParent();
+
+		if (p == null || p.isRoot() || getType().equals(Type.METHOD))
+			return name;
+
+		return p.getMethodName();
+	}
+
 	private static String getSymbol(Type t1, Type t2) {
 		if (t1 == Type.PACKAGE) {
 			return t1.getSymbol();
@@ -167,7 +198,7 @@ public class Node {
 		}
 		return false;
 	}
-	
+
 	public String getFullNameWithSymbol (int fromDepth) {
         Node p = getParent();
 

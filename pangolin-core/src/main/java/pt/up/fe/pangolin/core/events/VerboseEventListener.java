@@ -23,7 +23,7 @@ public class VerboseEventListener implements EventListener {
 
 	@Override
 	public void addProbe(int id, int nodeId) {
-		System.out.println("Add Node " + id + " " + nodeId);
+		System.out.println("Add Probe Node " + id + " " + nodeId);
 	}
 
 	@Override

@@ -92,6 +92,7 @@ public class SpectrumImpl implements Spectrum {
 	public void addTransaction(String transactionName, boolean[] activity, int hashCode, boolean isError) {
 		Transaction t = new Transaction(transactionName, activity, hashCode, isError);
 		if (t.hasActivations()) {
+			System.out.println("Transaction Activated");
 			transactions.add(t);
 		}
 	}
